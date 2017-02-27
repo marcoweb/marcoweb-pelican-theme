@@ -1,0 +1,8 @@
+{% if PODCASTS|length > 0 %}
+<h4>Podcasts Recomendados</h4>
+<ol class="list-unstyled">
+    {% for name, url in PODCASTS.iteritems() %}
+    <li><a href="{{url}}">{{name}}</a></li>
+    {% endfor %}
+</ol>
+{% endif %}
