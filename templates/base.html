@@ -11,7 +11,7 @@
     crossorigin="anonymous" />
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
     crossorigin="anonymous">
-    <link rel="stylesheet" href="theme/css/main.css" /> {% if FEED_ALL_ATOM %}
+    <link rel="stylesheet" href="/theme/css/main.css" /> {% if FEED_ALL_ATOM %}
     <link href="{{ FEED_DOMAIN }}/{{ FEED_ALL_ATOM }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Full Atom Feed"
     /> {% endif %} {% if FEED_ALL_RSS %}
     <link href="{{ FEED_DOMAIN }}/{{ FEED_ALL_RSS }}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} Full RSS Feed"
@@ -43,7 +43,7 @@
           <span class="icon-bar"></span>
           </button>
           {% if HEADER_IMAGE %}
-          <img src="{{HEADER_IMAGE}}" />
+          <img src="{{HEADER_IMAGE}}" />&nbsp;
           {% else %}
           <a class="navbar-brand" href="{{ SITEURL }}/">{{ SITENAME }} <strong>{{ SITESUBTITLE }}</strong></a>
           {% endif %}
@@ -53,18 +53,26 @@
           {% for title, link in MENUITEMS %}
           <li><a href="{{ link }}">{{ title }} </a></li>
           {% endfor %}
+          <!-- Pages -->
+          {% if DISPLAY_PAGES_ON_MENU %}
+            {% for p in pages|sort(reverse=False) %}
+            <li{% if p == page %} class="active"{% endif %}><a href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a></li>
+            {% endfor %}
+          {% endif %}
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <!-- Categorias -->
           {% if DISPLAY_CATEGORIES_ON_MENU %}
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categorias <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              {% for cat, null in categories %}
-              <li><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a></li>
-              {% endfor %}
-            </ul>
-          </li>
+            {% if categories|length > 0 %}
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categorias <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                {% for cat, null in categories|sort(reverse=False) %}
+                <li><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a></li>
+                {% endfor %}
+              </ul>
+            </li>
+            {% endif %}
           {% endif %}
       </div>
     </div>
@@ -84,6 +92,7 @@
       </div>
     </div>
   </div>
+  <hr />
   <footer id="contentinfo" class="body">
     <address id="about" class="vcard body">
       Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.

@@ -1,11 +1,13 @@
 {% if SOCIAL_LINKS|length > 0 %}
 <h4>Redes Sociais</h4>
-  {% for application, url in SOCIAL_LINKS.iteritems() %}
-  <a href="{{url}}">
+  {% for application, url in SOCIAL_LINKS.iteritems()|sort(reverse=False) %}
+  <span class="icon-link">
+  <a href="{{url}}" target="_blank">
     <span class="fa-stack fa-lg">
       <i class="fa fa-square fa-stack-2x"></i>
       <i class="fa fa-{{application}} fa-stack-1x fa-inverse"></i>
     </span>
   </a>
+  </span>
   {% endfor %}
 {% endif %}
