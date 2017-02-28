@@ -1,3 +1,3 @@
 MarcoWeb Pelican Theme
 ======================
-Tema para Pelican desenvolvido para marcoweb.github.io baseado em Bootstrap.
+Tema baseado em Boostrap, desenvolvido para https://marcoweb.github.io.
