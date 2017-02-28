@@ -1,6 +1,6 @@
-{% if SOCIAL_LINKS|length > 0 %}
+{% if SOCIAL|length > 0 %}
 <h4>Redes Sociais</h4>
-  {% for application, url in SOCIAL_LINKS.iteritems()|sort(reverse=False) %}
+  {% for application, url in SOCIAL.iteritems()|sort(reverse=False) %}
   <span class="icon-link">
   <a href="{{url}}" target="_blank">
     <span class="fa-stack fa-lg">
